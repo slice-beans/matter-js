@@ -33,7 +33,7 @@ var Engine = {};
 
         var defaults = {
             enabled: true,
-            hasDocument: true,
+            useRenderer: true,
             positionIterations: 6,
             velocityIterations: 4,
             constraintIterations: 2,
@@ -61,7 +61,7 @@ var Engine = {};
         
         var engine = Common.extend(defaults, options);
 
-        if(engine.hasDocument){
+        if(engine.useRenderer){
             engine.render = engine.render.controller.create(engine.render);
         }
         engine.world = World.create(engine.world);
@@ -207,6 +207,11 @@ var Engine = {};
      */
     Engine.render = function(engine) {
         // create an event object
+
+        if(!engine.useRenderer){
+            return;
+        }
+
         var event = {
             timestamp: engine.timing.timestamp
         };
