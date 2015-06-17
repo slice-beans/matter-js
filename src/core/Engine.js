@@ -33,6 +33,7 @@ var Engine = {};
 
         var defaults = {
             enabled: true,
+            hasDocument: true,
             positionIterations: 6,
             velocityIterations: 4,
             constraintIterations: 2,
@@ -60,7 +61,9 @@ var Engine = {};
         
         var engine = Common.extend(defaults, options);
 
-        engine.render = engine.render.controller.create(engine.render);
+        if(engine.hasDocument){
+            engine.render = engine.render.controller.create(engine.render);
+        }
         engine.world = World.create(engine.world);
         engine.pairs = Pairs.create();
         engine.broadphase = engine.broadphase.controller.create(engine.broadphase);
